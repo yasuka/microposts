@@ -1,4 +1,8 @@
 <h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
+  <ol style="list-style-type: none">
+    <li><%= gravatar_for @user %></li>
+    <li><%= @user.name %></li>
+    <li><%= @user.email %></li>
+    <li><%= @user.area %></li>
+  </ol>
 </h1>
