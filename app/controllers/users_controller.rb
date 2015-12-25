@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  before_action :correct_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :correct_user!, only: [:edit, :update]
+  
+  
   def show
-    @user = User.find(params[:id])
   end
   
   def new
@@ -9,13 +11,11 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
   end
   
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to @user , notice: 'メッセージを編集しました'
+      redirect_to @user , notice: 'プロフィール内容を編集しました'
     else
       render 'edit'
     end
@@ -38,8 +38,11 @@ class UsersController < ApplicationController
                                  :password_confirmation)
   end
   
-  def correct_user
+  def set_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless @user == current_user
+  end
+  
+  def correct_user!
+    redirect_to(root_url, alert: "不正なアクセスはやめてください！") unless @user == current_user
   end
 end
