@@ -1,8 +1,18 @@
-<h1>
-  <ol style="list-style-type: none">
-    <li><%= gravatar_for @user %></li>
-    <li><%= @user.name %></li>
-    <li><%= @user.email %></li>
-    <li><%= @user.area %></li>
-  </ol>
-</h1>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if @user.microposts.any? %>
+      <h3>つぶやき (<%= @user.microposts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+    <% end %>
+  </div>
+</div>
